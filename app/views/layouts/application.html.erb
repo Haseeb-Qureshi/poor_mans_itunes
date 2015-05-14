@@ -16,7 +16,11 @@
     <%= flash[:errors] %>
   <% end %>
 
+  <%= flash[:notice] %>
+
   <%= yield %>
+
+  <%= render "shared/footer" unless @sign_in_page %>
 
 </body>
 </html>

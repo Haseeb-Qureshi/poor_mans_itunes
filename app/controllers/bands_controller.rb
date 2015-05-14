@@ -1,4 +1,6 @@
 class BandsController < ApplicationController
+  before_action :redirect_if_not_logged_in
+  
   def index
     @bands = Band.all
     render :index
@@ -12,7 +14,7 @@ class BandsController < ApplicationController
   def create
     @band = Band.new(band_params)
     if @band.save
-      flash.now[:notice] = "Band created"
+      flash[:notice] = "Band created"
       redirect_to band_url(@band)
     else
       flash.now[:error] = @band.errors.full_messages
@@ -28,7 +30,7 @@ class BandsController < ApplicationController
   def update
     @band = Band.find(params[:id])
     if @band.update(band_params)
-      flash.now[:notice] = "Band updated"
+      flash[:notice] = "Band updated"
       redirect_to band_url(@band)
     else
       flash.now[:error] = @band.errors.full_messages
@@ -39,7 +41,7 @@ class BandsController < ApplicationController
   def destroy
     @band = Band.find(params[:id])
     @band.destroy
-    flash.now[:notice] = "Band deleted"
+    flash[:notice] = "Band deleted"
     redirect_to bands_url
   end
 

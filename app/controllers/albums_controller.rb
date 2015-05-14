@@ -1,4 +1,6 @@
 class AlbumsController < ApplicationController
+  before_action :redirect_if_not_logged_in
+  
   def new
     @album = Album.new(band_id: params[:band_id])
     render :new
@@ -8,7 +10,7 @@ class AlbumsController < ApplicationController
     # assign id based on band id as well
     @album = Album.new(album_params)
     if @album.save
-      flash.now[:notice] = "Album created"
+      flash[:notice] = "Album created"
       redirect_to band_url(@album)
     else
       flash.now[:error] = @album.errors.full_messages
@@ -24,7 +26,7 @@ class AlbumsController < ApplicationController
   def update
     @album = Album.find(params[:id])
     if @album.update(album_params)
-      flash.now[:notice] = "Album updated"
+      flash[:notice] = "Album updated"
       redirect_to band_url(@album)
     else
       flash.now[:error] = @album.errors.full_messages
@@ -35,7 +37,7 @@ class AlbumsController < ApplicationController
   def destroy
     @album = Album.find(params[:id])
     @album.destroy
-    flash.now[:notice] = "Album deleted"
+    flash[:notice] = "Album deleted"
     redirect_to band_url(@album.band)
   end
 

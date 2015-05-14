@@ -1,4 +1,6 @@
 class TracksController < ApplicationController
+  before_action :redirect_if_not_logged_in
+
   def new
     @track = Track.new(album_id: params[:album_id])
     render :new
@@ -8,7 +10,7 @@ class TracksController < ApplicationController
     #assign album ID based on ID as well
     @track = Track.new(track_params)
     if @track.save
-      flash.now[:notice] = "Track created"
+      flash[:notice] = "Track created"
       redirect_to track_url(@track)
     else
       flash.now[:error] = @track.errors.full_messages
@@ -24,7 +26,7 @@ class TracksController < ApplicationController
   def update
     @track = Track.find(params[:id])
     if @track.update(album_params)
-      flash.now[:notice] = "Track updated"
+      flash[:notice] = "Track updated"
       redirect_to band_url(@track)
     else
       flash.now[:error] = @track.errors.full_messages
@@ -35,7 +37,7 @@ class TracksController < ApplicationController
   def destroy
     @track = Track.find(params[:id])
     @track.destroy
-    flash.now[:notice] = "Track deleted"
+    flash[:notice] = "Track deleted"
     redirect_to album_url(@track.album)
   end
 

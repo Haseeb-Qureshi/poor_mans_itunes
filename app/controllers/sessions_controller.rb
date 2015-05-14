@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     user = User.find_by_credentials(user_params)
     if user
       log_in(user)
-      redirect_to user_url(user)
+      redirect_to bands_url
     else
       flash.now[:errors] = "Invalid email/password combination"
       @user = User.new(user_params)
