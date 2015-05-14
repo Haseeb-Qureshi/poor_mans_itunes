@@ -1,0 +1,7 @@
+<h1>Register</h1>
+
+<%= render "shared/form",
+    user: @user,
+    url_dest: users_url,
+    http_method: :post,
+    submit_text: "Register" %>

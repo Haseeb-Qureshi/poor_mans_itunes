@@ -1,0 +1,7 @@
+<h1>Create a new album for <%= @album.band.name %></h1>
+
+<%= render "form",
+    album: @album,
+    url_dest: albums_url,
+    http_method: :post,
+    submit_text: "Create album" %>

@@ -1,0 +1,7 @@
+<footer>
+  <% if logged_in? %>
+    <%= link_to "Sign out", session_url, method: :delete %>
+  <% else %>
+    <%= link_to "Sign in", new_session_url %>
+  <% end %>
+</footer>

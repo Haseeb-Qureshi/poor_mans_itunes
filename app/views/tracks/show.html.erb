@@ -1,0 +1,22 @@
+<h1> <%= @track.title %> </h1>
+<br/>
+
+<table>
+  <tr>
+    <th>Band</th> <td> <%= @track.band.name %> </td>
+  </tr>
+  <tr>
+    <th>Album</th> <td> <%= @track.album.name %> </td>
+  </tr>
+  <% @track.attributes.each do |attr, value| %>
+    <% next if ["created_at", "updated_at", "bonus", "album_id", "id"].include?(attr) %>
+    <tr>
+      <th> <%= attr.capitalize %> </th> <td> <%= value %> </td>
+    </tr>
+  <% end %>
+</table>
+
+<br/>
+<%= link_to "Delete track", track_url(@track), method: :delete %>
+<br/>
+<%= link_to "Back to album", album_url(@track.album) %>

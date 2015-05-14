@@ -1,0 +1,7 @@
+<h1>Edit your band</h1>
+
+<%= render "form",
+    band: @band,
+    url_dest: band_url(@band),
+    http_method: :patch,
+    submit_text: "Edit band" %>

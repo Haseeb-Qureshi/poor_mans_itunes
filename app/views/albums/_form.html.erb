@@ -1,0 +1,25 @@
+<form action="<%= url_dest %>" method="post">
+  <input type="hidden" name="_method" value="<%= http_method %>">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <label>Album name
+    <input type="text" name="album[name]" value="<%= album.name %>">
+  </label>
+  <br/>
+
+  <label>Studio
+    <input type="radio" name="album[live]" value="false" check>
+  </label>
+
+  <label>Live
+    <input type="radio" name="album[live]" value="true">
+  </label>
+  <br/>
+
+  <select name="album[band_id]">
+    <%= list_options(album.band) %>
+  </select>
+
+  <br/><br/>
+  <input type="submit" value="<%= submit_text %>">
+</form>

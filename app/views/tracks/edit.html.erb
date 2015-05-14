@@ -1,0 +1,7 @@
+<h1>Edit your track</h1>
+
+<%= render "form",
+    track: @track,
+    url_dest: track_url(@track),
+    http_method: :patch,
+    submit_text: "Edit track" %>

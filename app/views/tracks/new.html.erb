@@ -1,0 +1,7 @@
+<h1>Create a new track</h1>
+
+<%= render "form",
+    track: @track,
+    url_dest: tracks_url,
+    http_method: :post,
+    submit_text: "Create track" %>

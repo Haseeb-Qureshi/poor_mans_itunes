@@ -1,0 +1,7 @@
+<h1>Create a new band</h1>
+
+<%= render "form",
+    band: @band,
+    url_dest: bands_url,
+    http_method: :post,
+    submit_text: "Create band" %>

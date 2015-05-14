@@ -1,0 +1,7 @@
+<h1>Edit your album</h1>
+
+<%= render "form",
+    album: @album,
+    url_dest: album_url(@album),
+    http_method: :patch,
+    submit_text: "Edit album" %>

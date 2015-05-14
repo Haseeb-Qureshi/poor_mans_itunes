@@ -1,0 +1,30 @@
+<form action="<%= url_dest %>" method="post">
+  <input type="hidden" name="_method" value="<%= http_method %>">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <label>Track title*
+    <input type="text" name="track[title]" value="<%= track.title %>">
+  </label>
+  <br/>
+
+  <label>Regular track
+    <input type="radio" name="track[bonus]" value="false" checked>
+  </label>
+
+  <label>Bonus track
+    <input type="radio" name="track[bonus]" value="true">
+  </label>
+  <br/>
+
+  <select name="track[album_id]">
+    <%= list_options(track.album) %>
+  </select>
+  <br/>
+
+  <label>Lyrics
+    <textarea name="track[lyrics]"><%= track.lyrics %></textarea>
+  </label>
+
+  <br/><br/>
+  <input type="submit" value="<%= submit_text %>">
+</form>
