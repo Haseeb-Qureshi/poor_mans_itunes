@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150514185721) do
+ActiveRecord::Schema.define(version: 20150514232328) do
 
   create_table "albums", force: :cascade do |t|
     t.string   "name",                       null: false
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20150514185721) do
     t.datetime "updated_at",                 null: false
   end
 
+  add_index "albums", ["band_id"], name: "index_albums_on_band_id"
   add_index "albums", ["name"], name: "index_albums_on_name"
 
   create_table "bands", force: :cascade do |t|
@@ -30,6 +31,17 @@ ActiveRecord::Schema.define(version: 20150514185721) do
   end
 
   add_index "bands", ["name"], name: "index_bands_on_name"
+
+  create_table "notes", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "track_id",   null: false
+    t.text     "note",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "notes", ["track_id"], name: "index_notes_on_track_id"
+  add_index "notes", ["user_id"], name: "index_notes_on_user_id"
 
   create_table "tracks", force: :cascade do |t|
     t.string   "title",                      null: false
@@ -43,13 +55,17 @@ ActiveRecord::Schema.define(version: 20150514185721) do
   add_index "tracks", ["title"], name: "index_tracks_on_title"
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",           null: false
-    t.string   "password_digest", null: false
-    t.string   "session_token",   null: false
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string   "email",                                      null: false
+    t.string   "password_digest",                            null: false
+    t.string   "session_token",                              null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.boolean  "activated",        default: false,           null: false
+    t.string   "activation_token", default: "pre-activated", null: false
+    t.boolean  "admin",            default: false,           null: false
   end
 
+  add_index "users", ["activation_token"], name: "index_users_on_activation_token"
   add_index "users", ["email"], name: "index_users_on_email"
   add_index "users", ["session_token"], name: "index_users_on_session_token"
 

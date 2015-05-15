@@ -2,12 +2,15 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  email           :string           not null
-#  password_digest :string           not null
-#  session_token   :string           not null
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id               :integer          not null, primary key
+#  email            :string           not null
+#  password_digest  :string           not null
+#  session_token    :string           not null
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  activated        :boolean          default("f"), not null
+#  activation_token :string           default("pre-activated"), not null
+#  admin            :boolean          default("f"), not null
 #
 
 class User < ActiveRecord::Base
@@ -16,6 +19,8 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6, allow_nil: true }
   validate :valid_email_format
   after_initialize :ensure_session_token
+
+  has_many :notes
 
   attr_reader :password
 
@@ -27,6 +32,10 @@ class User < ActiveRecord::Base
 
   def self.generate_session_token
     SecureRandom.urlsafe_base64
+  end
+
+  def self.generate_activation_token
+    SecureRandom.urlsafe_base64(8)
   end
 
   def reset_session_token!
@@ -42,6 +51,10 @@ class User < ActiveRecord::Base
 
   def is_password?(password)
     BCrypt::Password.new(password_digest).is_password?(password)
+  end
+
+  def admin?
+    admin
   end
 
   private

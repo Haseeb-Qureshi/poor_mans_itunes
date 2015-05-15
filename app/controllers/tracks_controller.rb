@@ -1,5 +1,6 @@
 class TracksController < ApplicationController
   before_action :redirect_if_not_logged_in
+  before_action :check_if_admin, only: [:edit, :update, :destroy]
 
   def new
     @track = Track.new(album_id: params[:album_id])

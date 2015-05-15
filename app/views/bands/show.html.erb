@@ -8,6 +8,8 @@
 <br/><br/>
 <%= link_to "Create a new album", new_band_album_url(@band) %>
 <br/>
-<%= link_to "Delete band", band_url(@band), method: :delete %>
-<br/>
+<% if current_user.admin? %>
+  <%= link_to "Delete band", band_url(@band), method: :delete %>
+  <br/>
+<% end %>
 <%= link_to "Back to all bands", bands_url %>

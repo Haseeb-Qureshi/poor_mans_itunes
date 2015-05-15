@@ -1,0 +1,14 @@
+<h1>All users</h1>
+<br>
+<table>
+  <% @users.each do |user| %>
+    <tr>
+      <th><%= user.email %></th>
+      <% if user.admin? %>
+       <td>Admin</td>
+      <% else %>
+       <td><%= link_to "Make admin", user_make_admin_url(user.id), method: :patch %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
