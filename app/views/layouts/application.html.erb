@@ -7,24 +7,29 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-  <div class="error">
-    <% if flash[:error].is_a?(Array) %>
-      <% flash[:error].each do |error| %>
-        <%= error %></br>
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="sr-only">Toggle navigation</span>
+      </button>
+    </div
+    <div class="error">
+      <% if flash[:error].is_a?(Array) %>
+        <% flash[:error].each do |error| %>
+          <%= error %></br>
+        <% end %>
+      <% else %>
+        <%= flash[:errors] %>
       <% end %>
-    <% else %>
-      <%= flash[:errors] %>
-    <% end %>
+    </div>
+
+    <div class="notice">
+      <%= flash[:notice] %>
+    </div>
+
+    <%= yield %>
+
+    <%= render "shared/footer" unless @sign_in_page %>
   </div>
-
-  <div class="notice">
-    <%= flash[:notice] %>
-  </div>
-
-  <%= yield %>
-
-  <%= render "shared/footer" unless @sign_in_page %>
-
 </body>
 </html>
