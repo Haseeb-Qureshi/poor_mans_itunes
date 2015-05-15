@@ -6,3 +6,7 @@
 
 <br/><br/>
 <%= link_to "Create a new band", new_band_url %>
+<br/>
+<% if current_user.admin? %>
+  <%= link_to "Admin Page", users_url %>
+<% end %>
