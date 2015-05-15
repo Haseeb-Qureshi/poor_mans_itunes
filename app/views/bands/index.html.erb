@@ -1,5 +1,6 @@
-<h1>All Bands</h1>
+<h1>The Poor Man's iTunes</h1>
 <br/>
+<h2>Bands</h2>
 <% @bands.each do |band| %>
   <h4><%= link_to band.name, band_url(band) %></h4>
 <% end %>

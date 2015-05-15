@@ -13,20 +13,21 @@
   </tr>
 </table>
 
-<br/>
+<% if @track.notes.any? %>
+  <h3>All Notes </h3>
+  <table>
+    <% @track.notes.each do |note| %>
+      <tr>
+        <th> <%= note.user.email %> </th><td> <%= note.note %> </td>
+        <% if current_user == note.user || current_user.admin? %>
+          <td><%= link_to "Delete note", note_url(note), method: :delete %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+  <br/>
+<% end %>
 
-<table>
-  <% @track.notes.each do |note| %>
-    <tr>
-      <th> <%= note.user.email %> </th><td> <%= note.note %> </td>
-      <% if current_user == note.user || current_user.admin? %>
-        <td><%= link_to "Delete note", note_url(note), method: :delete %></td>
-      <% end %>
-    </tr>
-  <% end %>
-</table>
-
-<br/>
 
 <%= render "notes/form", track: @track %>
 

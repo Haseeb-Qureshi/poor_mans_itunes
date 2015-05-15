@@ -28,7 +28,7 @@ class TracksController < ApplicationController
     @track = Track.find(params[:id])
     if @track.update(album_params)
       flash[:notice] = "Track updated"
-      redirect_to band_url(@track)
+      redirect_to track_url(@track)
     else
       flash.now[:error] = @track.errors.full_messages
       render :edit
